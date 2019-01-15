@@ -168,5 +168,9 @@ public class JDBCUtils {
             map.put(name, value);
         }
     }
+    public void closeConnection() throws SQLException {
+        connection.close();
+
+    }
 
 }

@@ -17,8 +17,7 @@ import java.util.Date;
  **/
 public class CreatePanelForLiving implements ActionListener {
     public static JButton register_btn = new MyButton(2,"登记");
-
-
+    public static JComboBox room_no=new JComboBox();  //房间号
     public static JTextField name_text = new JTextField(); //姓名
     public static JComboBox sex_combox = new JComboBox(); //性别
     public static JTextField tel_text = new JTextField(); //电话号码
@@ -29,16 +28,58 @@ public class CreatePanelForLiving implements ActionListener {
 
     public static JComboBox days_combox=new JComboBox();//居住天数
     public static JTextField come_time=new JTextField(); //来的时间
-    public static JTextField ex_left_time=new JTextField(); //预计离开时间
+
+    //public static JTextField ex_left_time=new JTextField(); //预计离开时间
 
 
     //public static JTextField left_time=new JTextField(); //实际离开时间
     public static JComboBox change_status=new JComboBox();//是否换房
 
+   // public static int message=0;
+
+    public static JPanel panel;
+
     public static JPanel CreatePanel(){
-        JPanel panel = new JPanel();
-        panel.setPreferredSize(new Dimension(0, 705));
+
+
+        panel = new JPanel();
+        panel.setPreferredSize(new Dimension(0, 800));
         panel.setBackground(new Color(176, 224, 230));
+
+
+        //房间号
+        JLabel room_label=new JLabel("房间编号");
+
+        //room_label.setBounds(50,30,100,25);
+        //room_no.setBounds(120,25,160,30);
+        room_label.setBounds(50, 30, 100, 25);
+        //introduce.setFont(new Font("微软雅黑", 0, 14));
+        room_no.setBounds(120, 25, 160, 30);
+        for (int k=1;k<10;k++){
+            room_no.addItem("000"+k);
+        }
+        room_no.addItem("00"+10);
+        room_no.addItem("00"+11);
+        room_no.addItem("00"+12);
+        room_no.addItem("00"+13);
+        room_no.addItem("00"+14);
+        room_no.addItem("00"+15);
+        room_no.addItem("00"+16);
+
+        /*
+        int k=0;
+        while(k<17){
+            if (k<9){
+                room_no.addItem("000"+k);
+            }
+            else {
+                room_no.addItem("00"+k);
+            }
+
+        }*/
+        panel.add(room_label);
+        panel.add(room_no);
+
 
 
          //姓名
@@ -73,6 +114,7 @@ public class CreatePanelForLiving implements ActionListener {
         id_text.setBounds(120, 185, 160, 30);
         panel.add(id_text);
         panel.add(id);
+
 
         //房费状态
         JLabel price = new JLabel("房费状态");
@@ -115,7 +157,7 @@ public class CreatePanelForLiving implements ActionListener {
 
         JLabel come_label = new JLabel("入住时间");
         //设置入住时间
-        come_label.setText(now_time);
+        come_time.setText(now_time);
         come_label.setBounds(50, 350, 100, 25);
         come_time.setBounds(120, 345, 160, 30);
         panel.add(come_label);
@@ -125,9 +167,10 @@ public class CreatePanelForLiving implements ActionListener {
         JLabel living_days=new JLabel("居住天数");
         living_days.setBounds(50, 390, 100, 25);
         days_combox.setBounds(120, 385, 160, 30);
-        String[] temp=new String[10];
-        for (int i=0;i<temp.length;i++){
-            days_combox.addItem(temp[i]);
+        //String[] temp=new String[10];
+
+        for (int i=1;i<10;i++){
+            days_combox.addItem(i+"");
         }
         panel.add(living_days);
         panel.add(days_combox);
@@ -177,10 +220,9 @@ public class CreatePanelForLiving implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource()==register_btn){
+          new RegisterInfoFromLiving().check_show();}
 
+    }
 
 
         }
-
-    }
-}

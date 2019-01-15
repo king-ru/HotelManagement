@@ -27,7 +27,7 @@ public class TodayIndentPanel extends JPanel {
         try{
             String sql="select * from Living";
             mapList=JDBCUtils.get().getQueryResults(sql,null);
-            String columns[]={"入住时间","房费状态","房号","性别","订单号","联系方式","类型","房费","是否换房","预计离开时间","姓名","实际离开时间"};
+            String columns[]={"入住时间","性别","订单号","类型","离开时间","姓名","是否换房","房间号","联系方式","房费","是否支付","预期离开时间","身份证号"};
             Object[][] ob=new Object[mapList.size()][columns.length];
             int i=0;
             int j=0;
@@ -54,21 +54,28 @@ public class TodayIndentPanel extends JPanel {
             };
             TableColumn column=null;
             m_view=new JTable(dtm);
+
             for (int k=0;k<columns.length;k++){
                 column=m_view.getColumnModel().getColumn(k);
-                if (k==0 || k==9 || k==11)
+                if (k==0 || k==2 || k==4 ||k==8 || k==11 )
                 {
-                    column.setPreferredWidth(220);
+                    column.setPreferredWidth(120);
+                }
+                else if(k==12){
+                    column.setPreferredWidth(150);
+                }
+                else if (k==1 || k==6){
+                    column.setPreferredWidth(60);
                 }
                 /*
                 if ( k==4 ||k==9 || k==10 ||k==3 ||k==5 ||k==6){
                     column.setPreferredWidth(100);
                 }*/
                 else {
-                    column.setPreferredWidth(100);
+                    column.setPreferredWidth(80);
                 }
             }
-            m_view.setSize(1200,700);
+            m_view.setSize(1750,700);
             m_view.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
             JScrollPane sPane=new JScrollPane(m_view);
             //面板的宽度随着窗口大小变化

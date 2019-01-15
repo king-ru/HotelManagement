@@ -13,9 +13,11 @@ import java.awt.*;
 public class RegisterLivingFrame extends JFrame {
     public static final String TITLE="登记入住";
     public static final int WIDTH=400;
-    public static final int HEIGHT=650;
+    public static final int HEIGHT=700;
     public static final int X=440;
     public static final int Y=100;
+
+
     public RegisterLivingFrame(){
         this.setSize(WIDTH,HEIGHT);
         this.setLocation(X,Y);
