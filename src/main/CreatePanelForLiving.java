@@ -1,7 +1,6 @@
 package main;
 
 import ui.MyButton;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -66,17 +65,6 @@ public class CreatePanelForLiving implements ActionListener {
         room_no.addItem("00"+15);
         room_no.addItem("00"+16);
 
-        /*
-        int k=0;
-        while(k<17){
-            if (k<9){
-                room_no.addItem("000"+k);
-            }
-            else {
-                room_no.addItem("00"+k);
-            }
-
-        }*/
         panel.add(room_label);
         panel.add(room_no);
 
@@ -120,8 +108,8 @@ public class CreatePanelForLiving implements ActionListener {
         JLabel price = new JLabel("房费状态");
         price.setBounds(50, 230, 100, 25);
         price_status.setBounds(120, 225, 160, 30);
-        price_status.addItem("未支付");
         price_status.addItem("已支付");
+        price_status.addItem("未支付");
         panel.add(price);
         panel.add(price_status);
 
@@ -213,8 +201,6 @@ public class CreatePanelForLiving implements ActionListener {
 
         return panel;
     }
-
-
 
 
     @Override

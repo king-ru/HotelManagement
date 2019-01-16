@@ -22,7 +22,9 @@ import static main.CreatePanelForLiving.*;
 public class RegisterInfoFromLiving {
     private String order_id;
     //Timestamp timeStamp;
-    String times1,times2;
+    String times1;
+    Integer day;
+
     private int message1=0;
     public RegisterInfoFromLiving(){
         //处理预期离开时间
@@ -31,7 +33,7 @@ public class RegisterInfoFromLiving {
     public void initDate(){
 
         String temp=days_combox.getSelectedItem()+"";
-        Integer day=Integer.parseInt(temp);
+        day=Integer.parseInt(temp);
 
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
         Date date = new Date();
@@ -41,8 +43,8 @@ public class RegisterInfoFromLiving {
 
 
         //预期离开日期
-        date.setDate(date.getDate()+day);
-        times2=date.toLocaleString();
+        //date.setDate(date.getDate()+day);
+        //times2=date.toLocaleString();
 
 
 
@@ -152,7 +154,9 @@ public class RegisterInfoFromLiving {
 
         list.add(sort.getSelectedItem()+"");
         list.add(times1);
-        list.add(times2);
+
+        list.add(day);
+
         list.add(null);
         list.add(change_status.getSelectedItem()+"");
 

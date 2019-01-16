@@ -1,6 +1,7 @@
 package login;
 
 import main.InitSetting;
+import main.MainActivity;
 import org.jb2011.lnf.beautyeye.ch3_button.BEButtonUI;
 
 import javax.swing.*;
@@ -21,7 +22,7 @@ public class Login1 implements ActionListener {
 
     private JFrame jFrame = new JFrame("登录");
     private Container c = jFrame.getContentPane();
-    private JLabel a1 = new JLabel("用户名");
+    private JLabel a1 = new JLabel("账号");
     private JTextField username = new JTextField();
     private JLabel a2 = new JLabel("密码");
     private JLabel titlelabel=new JLabel("Hotel 登录系统");
@@ -38,7 +39,7 @@ public class Login1 implements ActionListener {
         //设置一层相当于桌布的东西
         c.setLayout(new BorderLayout());//布局管理器
         //设置按下右上角X号后关闭
-        jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        jFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         //初始化--往窗体里放其他控件
         init();
         //设置窗体可见
@@ -119,6 +120,7 @@ public class Login1 implements ActionListener {
                         /////直接new下一个窗口
                         //该窗口不可见
                         jFrame.setVisible(false);
+                        new MainActivity();
 
                         rs.close();
                         stmt.close();
@@ -157,7 +159,12 @@ public class Login1 implements ActionListener {
     //测试
     public static void main(String[] args) {
 
-        InitSetting.init();
+        try {
+
+            org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         new Login1();
     }
 }

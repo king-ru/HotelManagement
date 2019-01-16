@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static main.CreatePanelForLiving.panel;
+
 /**
  * @program: HotelManagement
  * @description:
@@ -195,6 +197,7 @@ import java.util.List;
         panel.setLayout(null);
         registerbtn.addActionListener(new CreatePanelForRegister());
 
+
         return panel;
 
     }
@@ -235,6 +238,10 @@ import java.util.List;
             {
                 JOptionPane.showMessageDialog(null,"注册成功","系统提示",JOptionPane.PLAIN_MESSAGE);
 
+                Container panel_container = panel.getParent().getParent().getParent().getParent();
+                Frame frame = (Frame) panel_container;
+                frame.dispose();
+
                 new Login1();
             }
 
@@ -245,7 +252,6 @@ import java.util.List;
  * 将用户信息注册保存到数据库
 
  */
-
 
     }
 

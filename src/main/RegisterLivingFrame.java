@@ -30,7 +30,7 @@ public class RegisterLivingFrame extends JFrame {
         this.add(panel_sou);
         //this.setContentPane(panel_sou);
 
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         this.setResizable(false); //禁止改变窗口大小
 

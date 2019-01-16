@@ -17,7 +17,7 @@ import static utils.JDBCUtils.get;
  * @program: HotelManagement
  * @description:用户管理
  * @author: Mrs.CeYi
- * @create: 2019-01-13 22:01
+ * @create: 2019-01-13 22:015
  **/
 public class FrontActivity extends JPanel implements ActionListener
 {
@@ -134,6 +134,11 @@ public class FrontActivity extends JPanel implements ActionListener
 
         }
         if (e.getSource()==pay_btn){
+            p3.setVisible(false);
+            p3.removeAll();
+            p3.add(new SettleAccountPanel());
+            message=1;
+            p3.setVisible(true);
 
         }
         if (e.getSource()==find_btn){

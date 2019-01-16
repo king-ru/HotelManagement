@@ -1,5 +1,8 @@
 package main;
 
+import main.Order.OrderFrame;
+import main.Order.OrderPanel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -22,9 +25,13 @@ import java.awt.event.ActionListener;
 
         public MainActivity()
         {
+            InitSetting.init();
             JFrame app=new JFrame("Hotel管理界面");
             Container c=app.getContentPane();
             c.setLayout(new BorderLayout());
+
+
+
 
             JPanel p1=new JPanel();
             p1.setBackground(Color.WHITE);
@@ -74,12 +81,12 @@ import java.awt.event.ActionListener;
             c.add(spane,"Center");
 
 
-            JPanel p5=new JPanel(new GridLayout(3,1));
-            p5.setBackground(Color.GREEN);
+            JPanel p5=new JPanel(new GridLayout(2,1));
+            p5.setBackground(Color.LIGHT_GRAY);
             c.add(p5,"South");
             p5.add(new JLabel("大数据学院",JLabel.CENTER));
             p5.add(new JLabel("made by 陈茹 黄鑫艳 王浩达 张青",JLabel.CENTER));
-            p5.add(new JLabel("Copyright 2019.",JLabel.CENTER));
+
 
             JPanel p6=new JPanel(new FlowLayout(FlowLayout.CENTER));
             p6.setBackground(Color.YELLOW);
@@ -104,14 +111,15 @@ import java.awt.event.ActionListener;
                 p3.add(new FrontActivity());
                 p3.setVisible(true);
             }
-            /*
+
             if(e.getSource()==order_btn)
             {
                 p3.setVisible(false);
                 p3.removeAll();
-                p3.add(new order_btn());
+                p3.add(new OrderPanel());
                 p3.setVisible(true);
             }
+            /*
             if(e.getSource()==find_btn)
             {
                 p3.setVisible(false);
@@ -148,7 +156,7 @@ import java.awt.event.ActionListener;
         public static void main(String args[])
         {
                 InitSetting.init();
-                new MainActivity();
+              new MainActivity();
 
         }
     }
