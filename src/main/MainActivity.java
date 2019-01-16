@@ -1,7 +1,12 @@
 package main;
 
-import main.Order.OrderFrame;
 import main.Order.OrderPanel;
+import main.chenru.frontdesk.FrontActivity;
+import main.chenru.frontdesk.InitSetting;
+import main.haoda.account.closingtActivity;
+import main.xinyan.Order.modification;
+import main.xinyan.Rchange.roomchange;
+import ui.MyButton;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,7 +25,7 @@ import java.awt.event.ActionListener;
     {
         //分为前台操作，预定管理，信息find_btn，信息修改，账户管理
 
-        private JButton recept_btn,order_btn,find_btn,change_btn,admin_btn,exit_btn;
+        private JButton recept_btn,order_btn,find_btn,change_btn,admin_btn,closing_btn,change_room_btn;
         private JPanel p3;
 
         public MainActivity()
@@ -40,35 +45,43 @@ import java.awt.event.ActionListener;
             p1.setLayout(new GridLayout(2,1));
 
 
-            JPanel p2=new JPanel(new GridLayout(6,1));
+            JPanel p2=new JPanel(new GridLayout(7,1));
             p1.add(p2);
 
 
 
-            recept_btn=new JButton("前台操作");
+            recept_btn=new MyButton(1,"前台操作");
             p2.add(recept_btn);
             recept_btn.addActionListener(this);
 
-            order_btn=new JButton("预定管理");
-            p2.add(order_btn);
-            order_btn.addActionListener(this);
+            closing_btn=new JButton("结账");
+            p2.add(closing_btn);
+            closing_btn.addActionListener(this);
 
             find_btn=new JButton("信息查询");
             p2.add(find_btn);
             find_btn.addActionListener(this);
 
+            change_room_btn=new JButton("换房");
+            p2.add(change_room_btn);
+            change_room_btn.addActionListener(this);
+
             change_btn=new JButton("信息修改");
             p2.add(change_btn);
             change_btn.addActionListener(this);
+
+            order_btn=new JButton("预定管理");
+            p2.add(order_btn);
+            order_btn.addActionListener(this);
 
             admin_btn=new JButton("账户管理");
             p2.add(admin_btn);
             admin_btn.addActionListener(this);
 
 
-            exit_btn=new JButton("退出系统");
-            p2.add(exit_btn);
-            exit_btn.addActionListener(this);
+            //exit_btn=new JButton("退出系统");
+            //p2.add(exit_btn);
+            //exit_btn.addActionListener(this);
 
             p3=new JPanel();
             ImageIcon icon1=new ImageIcon("D:\\ideaProject\\HotelManagement\\src\\resources\\images\\mainActivity.gif");
@@ -119,6 +132,27 @@ import java.awt.event.ActionListener;
                 p3.add(new OrderPanel());
                 p3.setVisible(true);
             }
+            if (e.getSource()==closing_btn){
+                p3.setVisible(false);
+                p3.removeAll();
+                p3.add(new closingtActivity());
+                p3.setVisible(true);
+            }
+
+            if (e.getSource()==change_room_btn){
+                p3.setVisible(false);
+                p3.removeAll();
+                p3.add(new roomchange());
+                p3.setVisible(true);
+            }
+            if(e.getSource()==change_btn)
+            {
+                p3.setVisible(false);
+                p3.removeAll();
+                p3.add(new modification());
+                p3.setVisible(true);
+            }
+
             /*
             if(e.getSource()==find_btn)
             {

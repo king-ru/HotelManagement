@@ -1,6 +1,5 @@
 package main.Order;
 
-import main.CreatePanelForLiving;
 import ui.MyButton;
 
 import javax.swing.*;
@@ -9,8 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import static main.CreatePanelForLiving.panel;
 
 /**
  * @program: HotelManagement
@@ -28,10 +25,10 @@ public class CreatePanelForOrder implements ActionListener {
     public static JTextField order_time=new JTextField(); //预定的时间
 
     public  static MyButton order_btn=new MyButton(3,"预定");
-
+    public static JPanel panel = new JPanel();
 
     public JPanel CreatePanel() {
-        JPanel panel = new JPanel();
+
         panel.setPreferredSize(new Dimension(0, 505));
         panel.setBackground(new Color(176, 224, 230));
 
@@ -100,7 +97,7 @@ public class CreatePanelForOrder implements ActionListener {
 
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
         String now_time=df.format(new Date());
-        JLabel order_label = new JLabel("入住时间");
+        JLabel order_label = new JLabel("预定时间");
         //设置预定时候的时间
         order_time.setText(now_time);
         order_label.setBounds(50, 270, 100, 25);
@@ -124,10 +121,12 @@ public class CreatePanelForOrder implements ActionListener {
             //先查数据库当中该房间的状态
             //可以自己设置一下check
             JOptionPane.showMessageDialog(null,"预订成功","系统提示",JOptionPane.PLAIN_MESSAGE);
-           // Container panel_container = panel.getParent().getParent().getParent().getParent();
-           // System.out.println(panel_container);
-           // Frame frame = (Frame) panel_container;
-           // frame.dispose();
+
+             Container panel_container = panel.getParent().getParent().getParent().getParent();
+            System.out.println(panel_container);
+           Frame frame = (Frame) panel_container;
+            frame.dispose();
+
         }
 
     }

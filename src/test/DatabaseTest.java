@@ -1,18 +1,12 @@
 package test;
 
-import main.CreatePanelForLiving;
 import utils.JDBCUtils;
 
-import javax.swing.*;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
-
-import static main.CreatePanelForLiving.*;
-import static main.CreatePanelForLiving.come_time;
-import static main.CreatePanelForLiving.sort;
 
 /**
  * @program: HotelManagement
