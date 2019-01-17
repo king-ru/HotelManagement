@@ -1,11 +1,12 @@
 package main;
 
-import main.Order.OrderPanel;
+import main.zhangqing.Order.OrderPanel;
 import main.chenru.frontdesk.FrontActivity;
 import main.chenru.frontdesk.InitSetting;
 import main.haoda.account.closingtActivity;
 import main.xinyan.Order.modification;
 import main.xinyan.Rchange.roomchange;
+import main.zhangqing.admin.Asum;
 import ui.MyButton;
 
 import javax.swing.*;
@@ -153,6 +154,13 @@ import java.awt.event.ActionListener;
                 p3.setVisible(true);
             }
 
+            if(e.getSource()==admin_btn)
+            {
+                p3.setVisible(false);
+                p3.removeAll();
+                p3.add(new Asum());
+                p3.setVisible(true);
+            }
             /*
             if(e.getSource()==find_btn)
             {

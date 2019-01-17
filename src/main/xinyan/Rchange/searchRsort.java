@@ -75,25 +75,6 @@ public class searchRsort {
 
         JPanel panel1=new JPanel();
         panel.add(panel1,"South");
-        JButton button1 = new JButton("完成");
-        button1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // TODO Auto-generated method stub
-                int count=table.getSelectedRow();//获取你选中的行号（记录）
-                if(count==-1){
-                    JOptionPane.showMessageDialog(panel, "请选择换房客房！", "系统提示", JOptionPane.WARNING_MESSAGE);
-                }else {
-                    if((table.getValueAt(count, 2).toString()).equals("0")){
-                        rStrings[0] = table.getValueAt(count, 0).toString();
-                        rStrings[1] = table.getValueAt(count, 1).toString();
-                        frame.dispose();
-                    }else{
-                        JOptionPane.showMessageDialog(panel, "该房不可换！", "系统提示", JOptionPane.WARNING_MESSAGE);
-                    }
-                }
-            }
-        });
         JButton button2 = new JButton("取消");
         button2.addActionListener(new ActionListener() {
             @Override
@@ -102,7 +83,6 @@ public class searchRsort {
                 frame.dispose();
             }
         });
-        panel1.add(button1);
         panel1.add(button2);
 
         JButton button = new JButton("\u67E5\u8BE2");
@@ -123,35 +103,41 @@ public class searchRsort {
                     if(k!=0){
                         message = 1;
                         Object ob[][] = new Object[k][7];
+                        Object ob1[][] = new Object[k][7];
+                        int m = 0;
                         for(int i = 0;(i<k)&&(rSet.next());i++){
-                            ob[i][0] = rSet.getString(1);
-                            ob[i][1] = rSet.getString(2);
-                            ob[i][2] = rSet.getString(3);
-                            ob[i][3] = rSet.getInt(4);
-                            ob[i][4] = rSet.getInt(5);
-                            ob[i][5] = rSet.getString(6);
-                            ob[i][6] = rSet.getString(7);
+                            if((rSet.getString(3)).equals("0")){
+                                ob[i][0] = rSet.getString(1);
+                                ob[i][1] = rSet.getString(2);
+                                ob[i][2] = rSet.getString(3);
+                                ob[i][3] = rSet.getInt(4);
+                                ob[i][4] = rSet.getInt(5);
+                                ob[i][5] = rSet.getString(6);
+                                ob[i][6] = rSet.getString(7);
+                                ob1[m++] = ob[i];
+                            }else{
 
+                            }
                         }
                         String s1[] = {"编号","类型","状态","房费","押金","负责人编码","客房电话"};
-                        table.setModel(new javax.swing.table.DefaultTableModel(ob, s1));
+                        table.setModel(new javax.swing.table.DefaultTableModel(ob1, s1));
                         table.setSize(450, 180);
                         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-                        for(int i = 0;i<k;i++){
-                            if(table.getValueAt(i, 2).toString()=="2"){
+//						for(int i = 0;i<k;i++){
+//							if(table.getValueAt(i, 2).toString()=="2"){
 //								table.setRowSelectionAllowed (true);//设置可否被选择.默认为false
 //								table.setSelectionBackground (Color.white);//设置所选择行的背景色
 //								DefaultTableCellRenderer backGroundColor = new DefaultTableCellRenderer();
 //								backGroundColor.setBackground(Color.blue);
-                                table.isCellEditable(i, 2);
-                            }
-                        }
+//								table.isCellEditable(i, 2);
+//							}
+//						}
                         JScrollPane scrollPane = new JScrollPane(table);
                         scrollPane.setPreferredSize(new Dimension(table.getWidth(),table.getHeight()));
                         pane.add(scrollPane);
 
                     }else{
-                        JOptionPane.showConfirmDialog(pane, "房间类型输入错误，请重新输入！", "系统提示", JOptionPane.YES_NO_OPTION);
+                        JOptionPane.showMessageDialog(pane, "房间类型输入错误，请重新输入！", "系统提示", JOptionPane.YES_NO_OPTION);
                     }
                 } catch (Exception e1) {
                     // TODO Auto-generated catch block
@@ -163,7 +149,7 @@ public class searchRsort {
                 if(message == 0){
                     JOptionPane.showMessageDialog(pane, "您查询的信息不存在！", "系统提示", JOptionPane.WARNING_MESSAGE);
                     //pane.removeAll();
-                    pane.setVisible(false);
+                    pane.setVisible(true);
                 }else{
                     message = 0;
                     container.setVisible(false);

@@ -146,9 +146,13 @@ public class rchangeinfo{
                             try {
                                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                                 String roomno = jComboBox.getSelectedItem()+"";
-                                String rsort = jComboBox1.getSelectedIndex()+"";
+                                String rsort = jComboBox1.getSelectedItem()+"";
+
+                                System.out.println(roomno);
+                                System.out.println(rsort);
+
                                 String s1 = sdf.format(sdf.parse(jTextFields[7].getText()));
-                                String s2 = sdf.format(sdf.parse("2000-01-01 00:00:00"));
+                                //String s2 = sdf.format(sdf.parse("null"));
                                 String sql = "insert into Exchange values('"+jTextFields[0].getText()+
                                         "','"+jTextFields[1].getText()+
                                         "','"+jTextFields[2].getText()+
@@ -160,10 +164,30 @@ public class rchangeinfo{
                                         "',"+jTextFields[8].getText()+
                                         ")";
 
-                                String rno = "select Rsort,Rprice,Rstatus from Room where Rno='"+jTextFields[3].getText()+"'";
+                                String rno = "select Rsort,Rstatus,Rprice from Room where Rno=?";
                                 db.getConn();
-                                ResultSet rSet = db.executeQuery(rno, new String[]{});
-                                if(!rSet.next()||rSet.getString(3)!="0"||rSet.getString(1)!=jTextFields[5].getText()){
+                                ResultSet rSet = db.executeQuery(rno, new String[]{roomno});
+                                rSet.last();
+                                int m = rSet.getRow();
+                                rSet.beforeFirst();
+                                //System.out.println(roomno+rsort);
+                                System.out.println(m);
+
+
+                                String temp2="";
+                                String temp1="";
+
+                               while (rSet.next()){
+                                    System.out.println(rSet.getString(1));
+                                    temp2=rSet.getString(1);
+
+                                    System.out.println(rSet.getString(2));
+                                    temp1=rSet.getString(2);
+                                    System.out.println(rSet.getString(3));
+                                }
+                                rSet.beforeFirst();
+
+                                if(!rSet.next() || (!temp1.equals("0")) || (!(temp2.equals(rsort)))){
                                     JOptionPane.showConfirmDialog(pane, "房间编号或房间类型输入错误，请重新输入！", "系统提示", JOptionPane.YES_NO_OPTION);
                                 }else{
                                     db.Autocommit();
@@ -171,12 +195,12 @@ public class rchangeinfo{
                                     int k1 = db.executeUpdata(sql, new String[]{});
 
                                     String sql1 = "Update Room set Rstatus=2 where Rno=?";
-                                    int k2 = db.executeUpdata(sql1, new String[]{jTextFields[3].getText()});
+                                    int k2 = db.executeUpdata(sql1, new String[]{roomno});
 
                                     String sql2 = "Update Room set Rstatus=0 where Rno=?";
                                     int k3 = db.executeUpdata(sql2, new String[]{jTextFields[2].getText()});
 
-                                    String sql3 = "Update Living set Rno='"+ jTextFields[3].getText() + "',Rprice='"+rSet.getString(2)+"',Rsort='"+rSet.getString(1)+"',Lcomtime='"+s1+"',Exdays='"+jTextFields[8].getText()+"',Llefttime='"+s2+"',Exchangestatus='是'  where Indentid=?";
+                                    String sql3 = "Update Living set Rno='"+ roomno + "',Rprice='"+rSet.getString(2)+"',Rsort='"+rSet.getString(1)+"',Lcomtime='"+s1+"',Exdays='"+jTextFields[8].getText()+"',Llefttime="+null+",Exchangestatus='是'  where Indentid=?";
                                     int k4 = db.executeUpdata(sql3, new String[]{jTextFields[0].getText()});
 
                                     db.commit();

@@ -37,15 +37,6 @@ public class RegisterInfoFromLiving {
 
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
         Date date = new Date();
-        //当前日期
-        times1= format.format(date);
-        //timeStamp = new Timestamp(date.getTime());
-
-
-        //预期离开日期
-        //date.setDate(date.getDate()+day);
-        //times2=date.toLocaleString();
-
 
 
     }
@@ -153,7 +144,7 @@ public class RegisterInfoFromLiving {
         list.add(price_day.getSelectedItem()+"");
 
         list.add(sort.getSelectedItem()+"");
-        list.add(times1);
+        list.add(come_time);
 
         list.add(day);
 

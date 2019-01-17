@@ -1,7 +1,6 @@
 package main.xinyan.Order;
 
 import main.xinyan.DateBase.DBoper;
-import ui.MyButton;
 
 import java.awt.Dimension;
 import javax.swing.JPanel;
@@ -55,20 +54,15 @@ public class ordermodi extends JPanel{
         );
 
         JLabel label = new JLabel("\u9884\u8BA2\u4FE1\u606F\u4FEE\u6539");
-        label.setFont(new Font("微软雅黑", Font.BOLD, 14));
+        label.setFont(new Font("宋体", Font.BOLD, 14));
 
         JLabel label_1 = new JLabel("\u8BF7\u8F93\u5165\u8054\u7CFB\u7535\u8BDD");
-        label_1.setFont(new Font("微软雅黑", Font.BOLD, 12));
+        label_1.setFont(new Font("宋体", Font.BOLD, 12));
 
         JTextField textField = new JTextField();
         textField.setColumns(10);
 
-        JTable table = new JTable(){
-            @Override
-            public boolean isCellEditable(int row,int column){
-                return false;
-            }
-        };
+        JTable table = new JTable();
 
         JPanel panel_1 = new JPanel();
 
@@ -107,12 +101,16 @@ public class ordermodi extends JPanel{
                             if(k == 0){
                                 DBoper db = new DBoper();
                                 try {
-                                    String sql = "delete from COrder where Indentid=?";
+                                    String sql = "delete from Oder where Orderid=?";
                                     String string = table.getValueAt(count, 0).toString();
+                                    String rsql = "Update Room set Rstatus=0 where Rno=?";
+                                    String srno = table.getValueAt(count, 3).toString();
                                     db.getConn();
-                                    db.executeUpdata(sql, new String[]{string});
-                                    JOptionPane.showMessageDialog(panel, "删除成功！", "系统提示", JOptionPane.WARNING_MESSAGE);
-
+                                    int k1 = db.executeUpdata(sql, new String[]{string});
+                                    int k2 = db.executeUpdata(rsql, new String[]{srno});
+                                    if(k1!=0&&k2!=0){
+                                        JOptionPane.showMessageDialog(panel, "删除成功！", "系统提示", JOptionPane.WARNING_MESSAGE);
+                                    }
                                     panel_1.setVisible(false);
                                     panel_1.removeAll();
                                     panel_1.setVisible(true);
@@ -128,7 +126,7 @@ public class ordermodi extends JPanel{
             panel_4.add(jb[j]);
         }
 
-        JButton button = new MyButton(3,"查询");
+        JButton button = new JButton("\u67E5\u8BE2");
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 DBoper db = new DBoper();
@@ -154,7 +152,7 @@ public class ordermodi extends JPanel{
                             ob[i][5] = rSet.getString(6);
                             ob[i][6] = rSet.getString(7);
                         }
-                        String s1[] = {"预定编号","姓名","联系方式","客房编号","客房类型","预期到时间","预定时间"};
+                        String s1[] = {"预定编号","姓名","联系方式","客房编号","客房类型","时间","预定时间"};
                         table.setModel(new javax.swing.table.DefaultTableModel(ob, s1));
                         table.setSize(450, 180);
                         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);

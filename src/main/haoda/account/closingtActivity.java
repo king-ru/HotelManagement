@@ -1,12 +1,8 @@
 package main.haoda.account;
 
-/**
- * @program: HotelManagement
- * @description: 结账
- * @author: Mrs.CeYi
- * @create: 2019-01-16 18:52
- **/
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
@@ -17,11 +13,17 @@ import java.awt.event.ActionListener;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.table.DefaultTableModel;
 
 public class closingtActivity extends JPanel {
     private JTextField in;
+    private JTable view;
+    private DefaultTableModel tablemodel = new DefaultTableModel();
+
+    JPanel panel = new JPanel();
 
     public closingtActivity() {
 
@@ -30,9 +32,10 @@ public class closingtActivity extends JPanel {
         in = new JTextField();
         in.setColumns(10);
 
-        JButton button = new JButton("修改数据库并结账");
+        JButton button = new JButton("结账");
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                // if()
                 int b = 1;
                 b = JOptionPane.showConfirmDialog(button, "确认结账?", "系统提示", JOptionPane.YES_NO_OPTION);// 否=1 是=0
                 if (b == 0) {
@@ -109,9 +112,34 @@ public class closingtActivity extends JPanel {
                             }
                             price = (nprice * nexday + rprice * rexday + 50) - (nprice * nday + rprice * rday);
                             JOptionPane.showMessageDialog(button,
-                                    "客户" + cname + ",在" + rsort + rpreno + "住房" + nday + "天后,于" + extime + "换房到" + nsort
+                                    "客户" + cname + ",在" + rsort + rpreno + "住房" + rday + "天后,于" + extime + "换房到" + nsort
                                             + rnowno + "住房" + nday + "天,退还押金和房费共" + price + "元",
                                     "系统提示", JOptionPane.WARNING_MESSAGE);
+
+                            String ob[][] = new String[1][9];
+                            ob[0][0] = cname;
+                            ob[0][1] = rsort;
+                            ob[0][2] = rpreno;
+                            ob[0][3] = String.valueOf(rday);
+                            ob[0][4] = extime;
+                            ob[0][5] = nsort;
+                            ob[0][6] = rnowno;
+                            ob[0][7] = String.valueOf(nday);
+                            ob[0][8] = String.valueOf(price);
+
+                            String x[] = { "客户姓名", "原房间类型", "原房间号", "原房间住房时间/天", "换房时间", "现房间类型", "现房间号", "现房间住房时间/天",
+                                    "退还金额" };
+
+                            tablemodel.setDataVector(ob, x);
+                            tablemodel.fireTableDataChanged();
+                            view = new JTable(tablemodel);
+                            view.setSize(600, 800);
+
+                            JScrollPane sPane = new JScrollPane(view);
+                            view.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+                            sPane.setPreferredSize(new Dimension(view.getWidth() - 300, view.getHeight() - 300));
+                            panel.add(sPane);
+
                         } else {
 
                             // 不换房
@@ -143,10 +171,50 @@ public class closingtActivity extends JPanel {
                                 price = (nexday - nday) * nprice + 50;
                                 JOptionPane.showMessageDialog(button, "客户" + cname + "在" + nsort + rnowno + "住房" + nday
                                         + "天后,提前退房,返还房费和押金共" + price + "元", "系统提示", JOptionPane.WARNING_MESSAGE);
+
+                                String ob[][] = new String[1][5];
+                                ob[0][0] = cname;
+                                ob[0][1] = nsort;
+                                ob[0][2] = String.valueOf(rnowno);
+                                ob[0][3] = String.valueOf(nday);
+                                ob[0][4] = String.valueOf(price);
+
+                                String x[] = { "客户姓名", "房间类型", "房间号", "房间住房时间", "退还金额" };
+                                tablemodel.setDataVector(ob, x);
+                                tablemodel.fireTableDataChanged();
+                                tablemodel = new DefaultTableModel(ob, x);
+                                view = new JTable(tablemodel);
+                                view.setSize(600, 800);
+
+                                JScrollPane sPane = new JScrollPane(view);
+                                view.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+                                sPane.setPreferredSize(new Dimension(view.getWidth() - 300, view.getHeight() - 300));
+                                panel.add(sPane);
+
                             } else {
                                 JOptionPane.showMessageDialog(button,
                                         "客户" + cname + "在" + nsort + rnowno + "住房" + nday + "天后,正常退房,退还押金50元", "系统提示",
                                         JOptionPane.WARNING_MESSAGE);
+
+                                String ob[][] = new String[1][5];
+                                ob[0][0] = cname;
+                                ob[0][1] = nsort;
+                                ob[0][2] = String.valueOf(rnowno);
+                                ob[0][3] = String.valueOf(nday);
+                                ob[0][4] = String.valueOf(50);
+
+                                String x[] = { "客户姓名", "房间类型", "房间号", "房间住房时间", "退还金额" };
+                                tablemodel.setDataVector(ob, x);
+                                tablemodel.fireTableDataChanged();
+                                tablemodel = new DefaultTableModel(ob, x);
+                                view = new JTable(tablemodel);
+                                view.setSize(600, 800);
+
+                                JScrollPane sPane = new JScrollPane(view);
+                                view.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+                                sPane.setPreferredSize(new Dimension(view.getWidth() - 300, view.getHeight() - 300));
+                                panel.add(sPane);
+
                             }
                         }
                     }
@@ -164,12 +232,16 @@ public class closingtActivity extends JPanel {
                                 .addGroup(groupLayout.createSequentialGroup().addGap(53).addComponent(label).addGap(18)
                                         .addComponent(in, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE))
                                 .addGroup(groupLayout.createSequentialGroup().addGap(141).addComponent(button)))
-                        .addContainerGap(174, Short.MAX_VALUE)));
-        groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-                .addGroup(groupLayout.createSequentialGroup().addGap(34)
-                        .addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(label).addComponent(
-                                in, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                        .addGap(32).addComponent(button).addContainerGap(190, Short.MAX_VALUE)));
+                        .addContainerGap(174, Short.MAX_VALUE))
+                .addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup().addContainerGap(34, Short.MAX_VALUE)
+                        .addComponent(panel, GroupLayout.PREFERRED_SIZE, 391, GroupLayout.PREFERRED_SIZE).addGap(25)));
+        groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout
+                .createSequentialGroup().addGap(34)
+                .addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(label).addComponent(in,
+                        GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addGap(32).addComponent(button).addPreferredGap(ComponentPlacement.RELATED)
+                .addComponent(panel, GroupLayout.PREFERRED_SIZE, 174, GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
         setLayout(groupLayout);
     }
 }

@@ -51,6 +51,7 @@ public class InitSetting {
     {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
+                System.setProperty("sun.java2d.noddraw", "true");
                 // 国人牛逼主题，值得学习
                 // 初始化字体
                 UIManager.put("RootPane.setupButtonVisible",false);

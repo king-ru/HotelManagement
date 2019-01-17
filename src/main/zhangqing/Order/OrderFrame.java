@@ -1,4 +1,4 @@
-package main.Order;
+package main.zhangqing.Order;
 
 
 import javax.swing.*;
