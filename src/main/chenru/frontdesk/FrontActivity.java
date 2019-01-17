@@ -24,7 +24,7 @@ public class FrontActivity extends JPanel implements ActionListener
     private JPanel p1,p2,p3,p4,p5;     //面板
     private JButton []jb=new JButton[3];
     private JScrollPane jsp1;          //滚动窗口
-    private int message=0;
+    public static int message=0;
     private JLabel jLabel;
 
     public FrontActivity()
@@ -44,7 +44,7 @@ public class FrontActivity extends JPanel implements ActionListener
         intake_btn.addActionListener(this);
         p2.add(intake_btn);
 
-        pay_btn=new MyButton(0,"退房");
+        pay_btn=new MyButton(0,"订单查询");
         p2.add(pay_btn);
         pay_btn.addActionListener(this);
 
@@ -73,34 +73,7 @@ public class FrontActivity extends JPanel implements ActionListener
     }
     public void actionPerformed(ActionEvent e) {
         try {
-            /*
-           Vector data_list=new Vector();
 
-            String s2=roomNo.getText();
-            String sql="select * from Room where Rno=?";
-            List list=new ArrayList();
-            list.add(s2);
-            Map map=get().getQueryResult(sql,list);
-
-            Iterator<Map.Entry<String, Object>> iterator = map.entrySet().iterator();
-            while (iterator.hasNext()) {
-                Map.Entry<String, Object> entry = iterator.next();
-
-                data_list.add(entry.getValue());
-            }
-            Vector s=new Vector();
-            s.add("房间编号");
-            s.add("类型");
-            s.add("状态");
-            s.add("价格");
-            s.add("押金");
-            s.add("负责人编号");
-            s.add("客房电话");
-            JTable table1 = new JTable(data_list, s);
-            table1.setSize(500, 500);
-            jsp1 = new JScrollPane(table1);
-            jsp1.setPreferredSize(new Dimension(table1.getWidth(), table1.getHeight()));
-            p4.add(jsp1, "Center");*/
 
             } catch (Exception e1) {
             e1.printStackTrace();
@@ -112,6 +85,7 @@ public class FrontActivity extends JPanel implements ActionListener
                 p3.setVisible(false);
                 p3.removeAll();
                 p3.add(new RoomStatusPanel());
+                //message=1;
                 p3.setVisible(true);
 
             }
@@ -128,12 +102,13 @@ public class FrontActivity extends JPanel implements ActionListener
         }
         if (e.getSource()==intake_btn){
             new RegisterLivingFrame();
+            message=1;
 
         }
         if (e.getSource()==pay_btn){
             p3.setVisible(false);
             p3.removeAll();
-            p3.add(new SettleAccountPanel());
+            p3.add(new CreatePanelForIndent());
             message=1;
             p3.setVisible(true);
 

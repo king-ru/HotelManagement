@@ -5,6 +5,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -23,7 +26,9 @@ public class CreatePanelForLiving implements ActionListener {
     public static JTextField id_text=new JTextField();//身份证号
     public static JComboBox price_status=new JComboBox();//房费支付状态
     public static JComboBox price_day=new JComboBox();//房费
-    public static JComboBox sort=new JComboBox();//房间类型
+
+    public  static JComboBox sort=new JComboBox();//房间类型
+    public static String sort_text=new String();
 
     public static JComboBox days_combox=new JComboBox();//居住天数
     public static JTextField come_time=new JTextField(); //来的时间
@@ -36,9 +41,14 @@ public class CreatePanelForLiving implements ActionListener {
 
    // public static int message=0;
 
-    public static JPanel panel;
+    public  static JPanel panel;
 
-    public static JPanel CreatePanel(){
+
+    public String get(){
+        return sort.getSelectedItem()+"" ;
+    }
+
+    public  static JPanel CreatePanel(){
 
 
         panel = new JPanel();
@@ -112,6 +122,8 @@ public class CreatePanelForLiving implements ActionListener {
         panel.add(price_status);
 
 
+
+
         //类型
         JLabel sort_label = new JLabel("房间类型");
         sort_label.setBounds(50, 270, 100, 25);
@@ -120,8 +132,14 @@ public class CreatePanelForLiving implements ActionListener {
         sort.addItem("标间");
         sort.addItem("大床房");
 
+        sort_text=sort.getSelectedItem()+"";
+
         panel.add(sort);
         panel.add(sort_label);
+
+
+
+
 
         //房费
 
@@ -205,7 +223,12 @@ public class CreatePanelForLiving implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource()==register_btn){
-          new RegisterInfoFromLiving().check_show();}
+            try {
+                new RegisterInfoFromLiving().check_show();
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
+        }
 
     }
 

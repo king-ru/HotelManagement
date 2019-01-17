@@ -14,12 +14,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @program: HotelManagement
- * @description: 预订房间
- * @author: Mrs.CeYi
- * @create: 2019-01-16 16:40
- **/
+
 public class OrderPanel extends JPanel implements ActionListener {
     JPanel p=new JPanel(new BorderLayout());
     JPanel p1=new JPanel(new GridLayout(1,3,20,0));
@@ -55,9 +50,9 @@ public class OrderPanel extends JPanel implements ActionListener {
         order_btn1.addActionListener(this);
     }
 
+    //查数据库并且显示
 
     public  void init_table() throws SQLException {
-
         JTable view;
         DefaultTableModel tablemodel = new DefaultTableModel();
         JPanel panel = new JPanel();
@@ -95,6 +90,8 @@ public class OrderPanel extends JPanel implements ActionListener {
         tablemodel.fireTableDataChanged();
         view = new JTable(tablemodel);
         TableColumn column=null;
+
+        //设置列的宽度
         for (int k1=0;k<s.length;k++){
             column=view.getColumnModel().getColumn(k);
             if (k1==5 ){
@@ -102,7 +99,6 @@ public class OrderPanel extends JPanel implements ActionListener {
             }
 
         }
-
 
 
         view.setSize(2500,30);

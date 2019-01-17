@@ -4,12 +4,7 @@ package main.zhangqing.Order;
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * @program: HotelManagement
- * @description: 预定管理
- * @author: Mrs.CeYi
- * @create: 2019-01-16 16:11
- **/
+
 public class OrderFrame extends JFrame {
     public static final String TITLE="预定";
     public static final int WIDTH=400;
@@ -24,8 +19,8 @@ public class OrderFrame extends JFrame {
         BorderLayout borderlayout=new BorderLayout();
         this.setLayout(borderlayout);
 
-        JPanel panel_sou=new CreatePanelForOrder().CreatePanel();
-        this.add(panel_sou);
+        JPanel panel1=new CreatePanelForOrder().CreatePanel();
+        this.add(panel1);
         //this.setContentPane(panel_sou);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 

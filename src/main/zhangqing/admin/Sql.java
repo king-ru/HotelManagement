@@ -1,18 +1,12 @@
 package main.zhangqing.admin;
-/**
- * 
- */
-/**
- * @author LENOVO
- *
- */
+
 import java.sql.*;
 
 public class Sql {
 
-    Connection conn = null;
-    PreparedStatement pstmt = null;
-    ResultSet rs = null;
+    Connection conn = null; //数据库连接
+    PreparedStatement pstmt = null; //用于数据库查询语句
+    ResultSet rs = null;  //用于返回结果集
 
     public Connection getConn() throws Exception {
 
@@ -44,14 +38,11 @@ public class Sql {
         }
     }
 
-    public ResultSet executeQuery(String preparedSql, String[] param) {
+    public ResultSet executeQuery(String preparedSql) {
         try {
+            //参数实现多次查询
             pstmt = conn.prepareStatement(preparedSql,ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
-            if (param != null) {
-                for (int i = 0; i < param.length; i++) {
-                    pstmt.setString(i + 1, param[i]);
-                }
-            }
+
              rs = pstmt.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -59,15 +50,11 @@ public class Sql {
         return rs;
     }
 
-    public int executeUpdata(String preparedSql, String[] param) {
+    public int executeUpdata(String preparedSql) {
         int num = 0;
         try {
             pstmt = conn.prepareStatement(preparedSql);
-            if (param != null) {
-                for (int i = 0; i < param.length; i++) {
-                    pstmt.setString(i + 1, param[i]);
-                }
-            }
+
             num = pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

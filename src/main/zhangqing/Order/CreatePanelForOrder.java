@@ -10,12 +10,7 @@ import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-/**
- * @program: HotelManagement
- * @description:
- * @author: Mrs.CeYi
- * @create: 2019-01-16 16:14
- **/
+
 public class CreatePanelForOrder implements ActionListener {
 
     public JTextField name_text = new JTextField(); //姓名
@@ -156,6 +151,7 @@ public class CreatePanelForOrder implements ActionListener {
         for (int i = 0; i < 6; i++) {
             result += random.nextInt(10);
         }
+        //将其拼接
         order_id = result + s1;
 
     }
@@ -181,35 +177,7 @@ public class CreatePanelForOrder implements ActionListener {
             sql.executeUpdata("update Room set Rstatus='1' where Rno='" + roomno + "'");
 
 
-/*
-            String sql="insert into Oder values(?,?,?,?,?,?,?)";
-            String sql1="update Room set Rstatus=? where Rno=?";
 
-            List list=new ArrayList();
-            List list1=new ArrayList();
-
-
-            list.add(order_id);
-            list.add(name_text.getText());
-            list.add(tel_text.getText());
-            list.add(room_no.getSelectedItem()+"");
-            list.add(sort.getSelectedItem()+"");
-
-            list.add(ex_come_time.getText());
-            list.add(order_time.getText());
-
-            list1.add("1");
-            list1.add(room_no.getSelectedItem()+"");
-
-
-            JDBCUtils.get().update(sql,list);
-            JDBCUtils.get().update(sql1,list1);
-
-
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }*/
 
     }
 }

@@ -69,7 +69,7 @@ public class delete extends JPanel{
 		JPanel panel_3 = new JPanel();
 
 		JPanel panel_4 = new JPanel();
-		JButton jButton= new MyButton(2,"删除");
+		JButton jButton= new JButton("删除");
 		jButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event) {
 				if(event.getActionCommand() == "删除"){
@@ -81,10 +81,10 @@ public class delete extends JPanel{
 						if(k == 0){
 							Sql db = new Sql();
 							try {
-								String sql = "delete from Admin where Userno=?";
-								String string = table.getValueAt(count, 0).toString();
+								//String sql = "delete from Admin where Userno=?";
+								//String string = table.getValueAt(count, 0).toString();
 								db.getConn();
-								int k1 = db.executeUpdata(sql, new String[]{string});
+								int k1 = db.executeUpdata("delete from Admin where Userno='"+table.getValueAt(count, 0).toString()+"'");
 								if(k1!=0)
 									JOptionPane.showMessageDialog(panel, "删除成功！", "系统提示", JOptionPane.WARNING_MESSAGE);
 
@@ -111,9 +111,9 @@ public class delete extends JPanel{
 					panel_3.removeAll();
 					panel_3.setVisible(true);
 					db.getConn();
-					String st1 = textField.getText();
-					String st2 = "select *from Admin where Userno=?";
-					ResultSet rSet = db.executeQuery(st2, new String[]{st1});
+					//String st1 = textField.getText();
+					//String st2 = "select *from Admin where Userno=?";
+					ResultSet rSet = db.executeQuery("select *from Admin where Userno='"+textField.getText()+"'");
 					rSet.last();
 					int k = rSet.getRow();
 					rSet.beforeFirst();
@@ -128,9 +128,13 @@ public class delete extends JPanel{
 							ob[i][4] = rSet.getString(5);
 						}
 						String s1[] = {"账号","密码","姓名","性别","联系电话"};
+						//建表语句传参数
 						table.setModel(new javax.swing.table.DefaultTableModel(ob, s1));
-						table.setSize(380, 180);
+
+						table.setSize(380, 150);
 						table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
+						//表格添加到滚动区
 						JScrollPane scrollPane = new JScrollPane(table);
 						scrollPane.setPreferredSize(new Dimension(table.getWidth(),table.getHeight()));
 						panel_3.add(scrollPane);

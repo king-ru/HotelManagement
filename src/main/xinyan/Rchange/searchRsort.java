@@ -95,7 +95,7 @@ public class searchRsort {
                     pane.setVisible(true);
                     db.getConn();
                     String st1 = jtf.getText();
-                    String st2 = "select *from Room where Rsort=?";
+                    String st2 = "select *from Room where Rstatus=0 and Rsort=?";
                     ResultSet rSet = db.executeQuery(st2, new String[]{st1});
                     rSet.last();
                     int k = rSet.getRow();
@@ -103,8 +103,7 @@ public class searchRsort {
                     if(k!=0){
                         message = 1;
                         Object ob[][] = new Object[k][7];
-                        Object ob1[][] = new Object[k][7];
-                        int m = 0;
+                       // int m = 0;
                         for(int i = 0;(i<k)&&(rSet.next());i++){
                             if((rSet.getString(3)).equals("0")){
                                 ob[i][0] = rSet.getString(1);
@@ -114,13 +113,14 @@ public class searchRsort {
                                 ob[i][4] = rSet.getInt(5);
                                 ob[i][5] = rSet.getString(6);
                                 ob[i][6] = rSet.getString(7);
-                                ob1[m++] = ob[i];
+                                //ob1[m++] = ob[i];
                             }else{
 
                             }
                         }
                         String s1[] = {"编号","类型","状态","房费","押金","负责人编码","客房电话"};
-                        table.setModel(new javax.swing.table.DefaultTableModel(ob1, s1));
+                        //table.setModel(new javax.swing.table.DefaultTableModel(ob1, s1));
+                        table.setModel(new javax.swing.table.DefaultTableModel(ob, s1));
                         table.setSize(450, 180);
                         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 //						for(int i = 0;i<k;i++){
