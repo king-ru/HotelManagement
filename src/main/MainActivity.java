@@ -1,5 +1,6 @@
 package main;
 
+import main.haoda.account.countActivity;
 import main.zhangqing.Order.OrderPanel;
 import main.chenru.frontdesk.FrontActivity;
 import main.chenru.frontdesk.InitSetting;
@@ -59,7 +60,7 @@ import java.awt.event.ActionListener;
             p2.add(closing_btn);
             closing_btn.addActionListener(this);
 
-            find_btn=new JButton("信息查询");
+            find_btn=new JButton("收入统计");
             p2.add(find_btn);
             find_btn.addActionListener(this);
 
@@ -159,6 +160,17 @@ import java.awt.event.ActionListener;
                 p3.setVisible(false);
                 p3.removeAll();
                 p3.add(new Asum());
+                p3.setVisible(true);
+            }
+            if(e.getSource()==find_btn)
+            {
+                p3.setVisible(false);
+                p3.removeAll();
+                try {
+                    p3.add(new countActivity());
+                } catch (Exception e1) {
+                    e1.printStackTrace();
+                }
                 p3.setVisible(true);
             }
             /*

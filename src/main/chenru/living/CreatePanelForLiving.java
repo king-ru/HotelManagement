@@ -49,10 +49,8 @@ public class CreatePanelForLiving implements ActionListener {
         //房间号
         JLabel room_label=new JLabel("房间编号");
 
-        //room_label.setBounds(50,30,100,25);
-        //room_no.setBounds(120,25,160,30);
+
         room_label.setBounds(50, 30, 100, 25);
-        //introduce.setFont(new Font("微软雅黑", 0, 14));
         room_no.setBounds(120, 25, 160, 30);
         for (int k=1;k<10;k++){
             room_no.addItem("000"+k);
@@ -121,6 +119,7 @@ public class CreatePanelForLiving implements ActionListener {
         sort.addItem("单人房");
         sort.addItem("标间");
         sort.addItem("大床房");
+
         panel.add(sort);
         panel.add(sort_label);
 
